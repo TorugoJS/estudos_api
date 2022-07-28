@@ -12,7 +12,7 @@ const emailInput = document.querySelector("#email");
 const bodyInput = document.querySelector("#body");
 
 
-//entrega um objeto para acessar o parametro da URL
+//entrega um objeto para acessar o parametro da URL.
 const urlSearchParams = new URLSearchParams(window.location.search)
 const postId = urlSearchParams.get("id")
 
@@ -23,7 +23,7 @@ async function getAllPosts() {
 
     console.log(response)
 
-    //transformando em array de objetos (json)
+    //transformando em array de objetos (json).
     const data = await response.json()
 
     console.log(data)
@@ -83,6 +83,7 @@ async function getPost(id) {
 
 }
 
+
 function createComment(comment) {
     const div = document.createElement("div");
     const email = document.createElement("h3");
@@ -96,6 +97,7 @@ function createComment(comment) {
     commentsContainer.appendChild(div);
 }
 
+
 //Post a comment
 async function postComment(comment) {
     //POST, PUT, PATCH, DELETE
@@ -106,6 +108,7 @@ async function postComment(comment) {
         headers: {
             "Content-type": "application/json",
         },
+        
     })
 
     const data = await response.json()
