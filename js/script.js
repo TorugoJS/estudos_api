@@ -1,4 +1,3 @@
-
 const url = "https://jsonplaceholder.typicode.com/posts";
 
 const loadingElement = document.querySelector("#loading");
@@ -12,7 +11,7 @@ const commentForm = document.querySelector("#comment-form");
 const emailInput = document.querySelector("#email");
 const bodyInput = document.querySelector("#body");
 
-//get id frin URL
+
 //entrega um objeto para acessar o parametro da URL
 const urlSearchParams = new URLSearchParams(window.location.search)
 const postId = urlSearchParams.get("id")
@@ -57,6 +56,7 @@ async function getAllPosts() {
 // get individual post
 
 async function getPost(id) {
+
     const [responsePost, responseComments] = await Promise.all([
         fetch(`${url}/${id}`),
         fetch(`${url}/${id}/comments`)
@@ -84,19 +84,35 @@ async function getPost(id) {
 }
 
 function createComment(comment) {
-    const div = document.createElement("div")
-    const email = document.createElement("h3")
-    const commentBody = document.createElement("p")
+    const div = document.createElement("div");
+    const email = document.createElement("h3");
+    const commentBody = document.createElement("p");
 
-    email.innerText = comment.email
-    commentBody.innerText = comment.body
+    email.innerText = comment.email;
+    commentBody.innerText = comment.body;
 
-    div.appendChild(email)
-    div.appendChild(commentBody)
-
+    div.appendChild(email);
+    div.appendChild(commentBody);
     commentsContainer.appendChild(div);
-
 }
+
+//Post a comment
+async function postComment(comment) {
+    //POST, PUT, PATCH, DELETE
+
+    const response = await fetch(`${url}/${postId}/comments`, {
+        method: "POST",
+        body: comment,
+        headers: {
+            "Content-type": "application/json",
+        },
+    })
+
+    const data = await response.json()
+
+    createComment(data);
+}
+
 
 if (!postId) {
     getAllPosts();
@@ -104,7 +120,7 @@ if (!postId) {
     getPost(postId)
 
     //add event to comment form
-    commentForm.addEventListener("submit", (e)=>{
+    commentForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
         let comment = {
@@ -112,6 +128,8 @@ if (!postId) {
             body: bodyInput.value,
         };
 
-console.log(comment)
+        comment = JSON.stringify(comment);
+
+        postComment(comment);
     })
 }
