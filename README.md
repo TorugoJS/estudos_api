@@ -1,3 +1,3 @@
-Estudos fecth API
+Estudos fetch API
 
 
