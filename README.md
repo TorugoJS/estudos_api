@@ -1,4 +1,12 @@
-Estudos Fetch API
+#Estudos Fetch API
+
+Aprendendo a manipular dados com Fetch API.
+
+✔ API <br>
+✔ json <br>
+✔ Formulários <br>
+
+<hr>
 
 https://myestudos-api.netlify.app/index.html
 
